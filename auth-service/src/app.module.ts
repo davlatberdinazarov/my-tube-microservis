@@ -7,10 +7,6 @@ import { User, UserSchema } from './user/entities/user.schema';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(`mongodb://localhost:27017/auth-service`),
-    MongooseModule.forFeature([
-      { name: User.name, schema: UserSchema }
-    ]),
     UserModule
   ],
   controllers: [AppController],

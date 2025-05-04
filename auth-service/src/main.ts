@@ -4,11 +4,14 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-    transport: Transport.TCP, // TCP transport
+    transport: Transport.TCP,
     options: {
-      port: 3001,
+      host: '127.0.0.1',
+      port: 4001, // bu gatewaydagi AUTH_SERVICE portiga mos bo'lishi kerak
     },
   });
+
   await app.listen();
+  console.log('Auth microservice is listening...');
 }
 bootstrap();
