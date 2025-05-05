@@ -15,7 +15,7 @@ async function bootstrap() {
 
 
   await app.startAllMicroservices();
-  await app.listen(3000); // HTTP REST API
-  console.log('API Gateway is listening on port 3000');
+  await app.listen(process.env.PORT); // HTTP REST API
+  console.log(`API Gateway is listening on port ${process.env.PORT}`);
 }
 bootstrap();

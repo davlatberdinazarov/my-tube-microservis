@@ -28,13 +28,13 @@ export class AuthService {
     const isMatch = await bcrypt.compare(dto.password, user.password);
     if (!isMatch) throw new Error('Invalid password');
 
-    const token = jwt.sign({ id: user._id, email: user.email }, 'SECRET_KEY');
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET );
     return { token };
   }
 
   async validateToken(token: string) {
     try {
-      const data = jwt.verify(token, 'SECRET_KEY');
+      const data = jwt.verify(token, process.env.JWT_SECRET );
       return data;
     } catch {
       return null;

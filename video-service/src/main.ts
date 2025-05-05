@@ -3,16 +3,16 @@ import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
-  const port = parseInt(process.env.AUTH_SERVICE_PORT || '0', 10);
+  const port = parseInt(process.env.VIDEO_SERVICE_PORT || "4002");
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
     transport: Transport.TCP,
     options: {
       host: '127.0.0.1',
-      port: port, // bu gatewaydagi AUTH_SERVICE portiga mos bo'lishi kerak
+      port: port, // bu gatewaydagi Videos_service portiga mos bo'lishi kerak
     },
   });
 
   await app.listen();
-  console.log(`Auth microservice is listening... on port ${port}`);
+  console.log(`Videos microservice is listening... on port ${port}`);
 }
 bootstrap();
