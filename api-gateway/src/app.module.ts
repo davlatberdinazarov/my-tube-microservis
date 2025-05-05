@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigModule } from '@nestjs/config';
+import { AuthController } from './auth/auth.controller';
+import { VideosController } from './videos/videos.controller';
+import { LikesController } from './likes/likes.controller';
 
 @Module({
   imports: [
@@ -10,20 +11,21 @@ import { ConfigModule } from '@nestjs/config';
     ClientsModule.register([
       {
         name: 'AUTH_SERVICE',
-        transport: Transport.TCP, // TCP transport
-        options: {
-          host: '127.0.0.1',
-          port: 4001, // Auth service TCP porti
-        },
+        transport: Transport.TCP,
+        options: { host: '127.0.0.1', port: 4001 },
       },
       {
         name: 'VIDEO_SERVICE',
         transport: Transport.TCP,
         options: { host: '127.0.0.1', port: 4002 },
       },
+      {
+        name: 'LIKES_SERVICE',
+        transport: Transport.TCP,
+        options: { host: '127.0.0.1', port: 4003 },
+      },
     ]),
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AuthController, VideosController, LikesController],
 })
 export class AppModule {}

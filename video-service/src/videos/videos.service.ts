@@ -29,8 +29,10 @@ export class VideosService {
   }
 
   async delete(id: string): Promise<void> {
+    const video = await this.videoModel.findById(id);
+    if (!video) throw new NotFoundException('Video topilmadi');
     const result = await this.videoModel.findByIdAndDelete(id);
-    if (!result) throw new NotFoundException('Video topilmadi');
+    return result ? undefined : null;
   }
 
   async like(id: string): Promise<Video> {
